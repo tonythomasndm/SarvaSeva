@@ -3,7 +3,7 @@ import React,{useState,useRef} from 'react';
 import {getApp,initializeApp} from 'firebase/app';
 import {FirebaseRecaptchaVerifierModal,FirebaseRecaptchaBanner} from 'expo-firebase-recaptcha';
 import {getAuth,PhoneAuthProvider,signInWithCredential} from 'firebase/auth';
-import { FIREBASE_APP, FIREBASE_AUTH, firebaseConfig } from '../../FirebaseConfig';
+import { FIREBASE_APP, FIREBASE_AUTH, firebaseConfig } from '../../../FirebaseConfig';
 import { NavigationProp } from '@react-navigation/native';
 
 
@@ -53,6 +53,7 @@ const SignInScreen: React.FC<SignInScreenProps> = ({navigation}) => {
             <FirebaseRecaptchaVerifierModal 
                 ref={recaptchaVerifier}
                 firebaseConfig={firebaseConfig}
+                invisible = {true}
             />
     
             {
