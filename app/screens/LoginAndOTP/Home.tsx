@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text, Button,StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { COLORS, SIZES } from '../../../constants';
+import Page1 from './components/PersonRegistration';
+import { EventCard } from './components/eventCard';
+import EventCreation from './components/eventCreation';
+import VolunteerApplication from './components/volunteerApplication';
+import EventPage from './components/eventPage';
 
 interface HomeScreenProps {
   navigation: NavigationProp<any>;
@@ -15,7 +20,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.button}>
       <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
-      
     </View>
   );
 };
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
     buttonText:{
       fontSize:20,
       color: "#fff",
-      fontFamily:'montserrat'
+      // fontFamily:'montserrat'
     }
 });
 

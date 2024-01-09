@@ -22,8 +22,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.ttonythomasndm.SarvaSeva"
+      }
     },
     "web": {
       "favicon": "./assets/logo.png",
@@ -35,9 +34,6 @@
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "b4814219-b326-4df7-9af2-b27bf66e374b"
       }
     }
   }

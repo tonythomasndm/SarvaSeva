@@ -1,9 +1,11 @@
 import {View,Text,StyleSheet} from 'react-native';
+import Page1 from './components/PersonRegistration';
 
 const WelcomeScreen = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Hurray!!, we are on the welcome screen</Text>
+            
         </View>
     )
     }
