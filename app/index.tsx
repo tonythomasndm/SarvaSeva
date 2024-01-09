@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Stack, useRouter,Link } from 'expo-router';
 import { COLORS, SIZES } from '../constants';
 
-import  PhoneNumberEntry  from '../components/LoginAndOTP/PhoneNumberEntry'
+import  PhoneNumberScreen  from './LoginAndOTP/PhoneNumberScreen'
 const Home = () =>{
     const router = useRouter();
 
@@ -13,13 +13,13 @@ const Home = () =>{
             options={{
                 headerStyle:{ backgroundColor:COLORS.buttons},
                 headerTitleAlign: 'center',
-                headerTitle:"SaramSeva",
+                headerTitle:"SarvaSeva",
                 headerTitleStyle:{color:'white', fontSize:SIZES.large}
             }}
             />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ flex:1, padding: SIZES.medium }}>
-                <PhoneNumberEntry/>
+                <PhoneNumberScreen/>
                 </View>    
             </ScrollView>
         </SafeAreaView>
