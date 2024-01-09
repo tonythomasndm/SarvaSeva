@@ -13,17 +13,17 @@ const OTPScreen = () => {
 
   const auth=getAuth(FIREBASE_APP);
 
-  useEffect(() => {
-    window.recaptchaVerifier = new RecaptchaVerifier(auth,"recaptcha-container", {
-      'size': 'invisible',
-      'callback': (response) => {
+  // useEffect(() => {
+  //   window.recaptchaVerifier = new RecaptchaVerifier(auth,"recaptcha-container", {
+  //     'size': 'invisible',
+  //     'callback': (response) => {
 
-      },
-      'expired-callback': () => {
+  //     },
+  //     'expired-callback': () => {
 
-      }
-    });
-  }, [auth]);
+  //     }
+  //   });
+  // }, [auth]);
 
   const handleSendOtp = async () => {
     try {
