@@ -13,22 +13,17 @@ interface HomeScreenProps {
   navigation: NavigationProp<any>;
 }
 
-const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+const OtpPage1: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.text }>Welcome to SarvaSeva</Text>
+      <Text style={styles.text }>Welcome to SarvaSeva</Text>
       <Image source={require('../../../assets/logo.png')} style={styles.image}/>
       <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.button}>
       <Text style={styles.buttonText}>Get Started</Text>
-      </TouchableOpacity> */}
-      {/* <EventPage navigation={navigation}></EventPage> */}
+      </TouchableOpacity>
+      {/* <EventPage></EventPage> */}
       {/* <EventDetails navigation={navigation}/> */}
-      <Page1 navigation={navigation}></Page1>
-      <TouchableOpacity onPress={()=>navigation.navigate('EventCreation')}>
-                <Text
-                style={styles.button}
-                >Create event</Text>
-            </TouchableOpacity>
+      {/* <Page1 navigation={navigation}></Page1> */}
     </View>
   );
 };
@@ -51,13 +46,13 @@ const styles = StyleSheet.create({
       height:200, margin:100
     },
     button:{
-      backgroundColor:'#148de3',
-      color:"#fff",
-      margin:10,
-      padding:15,
-      fontSize:20,
-      textAlign:'center',
-      borderRadius:20,
+        backgroundColor:'#36c2cf',
+        color:"#fff",
+        margin:10,
+        padding:15,
+        fontSize:20,
+        textAlign:'center',
+        borderRadius:20,
 
     },
     buttonText:{
@@ -67,4 +62,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HomeScreen;
+export default OtpPage1;

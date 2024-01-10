@@ -9,7 +9,7 @@ const EventCreation=()=>{
     const [eventTime,setEventTime]=useState('');
     const [eventDate,setEventDate]=useState('');
     const [eventType,setEventType]=useState('');
-
+    const [eventVenue,setEventVenue]=useState('');
 
     const addEvent=async()=>{
         try{
@@ -17,7 +17,8 @@ const EventCreation=()=>{
                 eventName:eventName,
                 eventTime:eventTime,
                 eventDate:eventDate,
-                eventType:eventType
+                eventType:eventType,
+                eventVenue:eventVenue
             });
             console.log('event added with id: ',docRef.id);
         }
@@ -34,6 +35,8 @@ const EventCreation=()=>{
             <TextInput value={eventDate} style={styles.input} placeholder="Event date" autoCapitalize="none" onChangeText={(text)=>setEventDate(text)}></TextInput>
             <TextInput value={eventTime} style={styles.input} placeholder="Event time" autoCapitalize="none" onChangeText={(text)=>setEventTime(text)}></TextInput>
             <TextInput value={eventType} style={styles.input} placeholder="Event type" autoCapitalize="none" onChangeText={(text)=>setEventType(text)}></TextInput>
+            <TextInput value={eventVenue} style={styles.input} placeholder="Event Venue" autoCapitalize="none" onChangeText={(text)=>setEventVenue(text)}></TextInput>
+
             {/* <TextInput value={}  placeholder="Skills" autoCapitalize="none" onChangeText={(text)=>setSkills(text)}></TextInput> */}
             <Button title="Add event" onPress={addEvent}/>
             

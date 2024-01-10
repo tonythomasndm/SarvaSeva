@@ -41,7 +41,7 @@ const SignInScreen: React.FC<SignInScreenProps> = ({navigation}) => {
             const credential = PhoneAuthProvider.credential(verificationId,verificationCode); // get the credential
             await signInWithCredential(FIREBASE_AUTH,credential); // verify the credential
             setInfo('Success: Phone authentication successful'); // if OK, set the message
-            navigation.navigate("Welcome"); // navigate to the welcome screen
+            navigation.navigate("EventPage"); // navigate to the welcome screen
         }catch(error){
             setInfo(`Error : ${error.message}`); // show the error.
         }

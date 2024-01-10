@@ -1,4 +1,7 @@
 import {TouchableOpacity, StyleSheet, Text, TextInput, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationProp } from '@react-navigation/native';
 
 
 const Divider = () => {
@@ -42,11 +45,11 @@ const Divider = () => {
           <View style={styles.row}>
             
               <View  style={styles.cell}>
-                <Text>Role</Text>
+                <Text>Type</Text>
               </View>
             
               <View  style={styles.cell}>
-                <Text>{props.role}</Text>
+                <Text>{props.type}</Text>
               </View>
           </View>
         
@@ -54,25 +57,51 @@ const Divider = () => {
     );
   };
 
-export const EventDetails=(props)=>{
+  export const EventDetails=(props)=>{
+
+    
+    const data=props.route.params;
+    console.log(data);
     return(
         
         <View style={styles.container}>
-            <Text style={styles.title}>{props.heading}</Text>
+            <Text style={styles.title}>{data.title}</Text>
             <Table 
             date="03 Jan  - 10 Jan, 2024"
             time="12:00 am to 03:00 am"
             venue="Near Akshardham Mandir Metro"
-            role="Carpenter"
+            type="seva"
              />
+             <View style={styles.description}>
+                {/* <Text style={styles.description_heading}>Description</Text> */}
+                <Text style={styles.description_content}></Text>
+             </View>
+             <TouchableOpacity
+      onPress={()=>props.navigation.navigate("VolunteerApplication")}
+      >
+        <Text
+        style={styles.btn}
+        >Apply</Text>
+      </TouchableOpacity>
+
 
         </View>
     )
 }
 
 const styles=StyleSheet.create({
+    btn:{
+      backgroundColor:'orange',
+      paddingTop:20,
+      paddingBottom:20,
+      paddingLeft:40,
+      paddingRight:40,
+      color:'white',
+      borderRadius:10,
+      fontSize:16,
+    },
     container:{
-        // flex:1,
+        flex:1,
         display:'flex',
         flexDirection:'column',
         backgroundColor:'#fff',
@@ -124,6 +153,4 @@ const styles=StyleSheet.create({
         padding:5,
         width:150,
     },
-
-
 })

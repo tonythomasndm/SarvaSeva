@@ -2,7 +2,7 @@ import {View, Text, TextInput, ActivityIndicator, Button, KeyboardAvoidingView,S
 import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../../../FirebaseConfig';
-const VolunteerApplication=()=>{
+const VolunteerApplication=(props:any)=>{
     const [skills,setSkills]=useState('');
     // const [phone,setPhone]=useState('');
     // const [address,setAddress]=useState('');

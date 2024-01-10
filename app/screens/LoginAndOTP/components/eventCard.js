@@ -6,6 +6,9 @@ const Divider = () => {
   };
 
 export const EventCard=(props)=>{
+  // const data=props.navigation.route.params;
+  console.log(props);
+  console.log(props.navigation);
     return(
         
         <View style={styles.container}>
@@ -13,13 +16,13 @@ export const EventCard=(props)=>{
                 <Text>Start Date</Text>
                 <Text>{props.startDate}</Text>
                 <Divider />
-                <Text>End Date</Text>
+                <Text>Time</Text>
                 <Text>{props.endDate}</Text>
 
             </View>
             <View>
                 <Text> {props.title}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>props.navigation.navigate('EventDetails',{title: props.title})}>
                 <Text
                 style={styles.button}
                 >View Details</Text>

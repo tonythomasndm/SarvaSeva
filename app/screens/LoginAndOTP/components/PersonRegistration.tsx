@@ -1,10 +1,13 @@
-import {View, Text, TextInput, ActivityIndicator, Button, KeyboardAvoidingView,StyleSheet} from 'react-native';
+import {View, Text, TextInput, ActivityIndicator, Button, KeyboardAvoidingView,StyleSheet,TouchableOpacity} from 'react-native';
 import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../../../FirebaseConfig';
+import { NavigationProp } from '@react-navigation/native';
+interface HomeScreenProps {
+    navigation: NavigationProp<any>;
+  }
 
-
-const Page1=()=>{
+const Page1: React.FC<HomeScreenProps>=({navigation})=>{
     const [name,setName]=useState('');
     const [phone,setPhone]=useState('');
     const [address,setAddress]=useState('');
@@ -20,6 +23,7 @@ const Page1=()=>{
                 skills:skills
             });
             console.log("person added with document id : ", docRef.id);
+            navigation.navigate("OtpPage1")
         }
         catch(e){
             console.error('error adding document: '+e);
@@ -35,8 +39,13 @@ const Page1=()=>{
             <TextInput value={address} style={styles.input} placeholder="Address" autoCapitalize="none" onChangeText={(text)=>setAddress(text)}></TextInput>
             <TextInput value={aadharno} style={styles.input} placeholder="Aadhar number" autoCapitalize="none" onChangeText={(text)=>setAadharno(text)}></TextInput>
             <TextInput value={skills} style={styles.input} placeholder="Skills" autoCapitalize="none" onChangeText={(text)=>setSkills(text)}></TextInput>
-            
-            <Button title="Save"  onPress={addPerson}/>
+            <TouchableOpacity
+      onPress={()=>addPerson()}
+      >
+        <Text
+        style={styles.button_save}
+        >Save</Text>
+      </TouchableOpacity>
             {/* {loading?(<ActivityIndicator size="large" color="#0000ff"/>)
             :(<>
             
@@ -53,11 +62,22 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     input:{
-        marginVertical:4,
+        marginTop:20,
         height:50,
         borderWidth:1,
         borderRadius:4,
         padding:10,
-        backgroundColor:"#fff"
+        backgroundColor:"#fff",
+        width: 250,
+    },
+    button_save:{
+        backgroundColor:'#36c2cf',
+        color:"#fff",
+        margin:10,
+        padding:15,
+        fontSize:20,
+        textAlign:'center',
+        borderRadius:20,
+
     }
 });
