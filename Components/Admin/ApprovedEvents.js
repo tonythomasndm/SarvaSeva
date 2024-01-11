@@ -5,9 +5,11 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { FIRESTORE_DB } from "../../FirebaseConfig";
 const ApprovedEvents=()=>{
     const [events,setEvents]=useState([]);
+    const [approvedEvents,setApprovedEvents]=useState([]);
+    var approvedEvent=[];
+
     useEffect(()=>{
         const eventRef=collection(FIRESTORE_DB,'Event');
-
         const subscriber=onSnapshot(eventRef,{
             next:(snapshot)=>{
                 const events=[];
@@ -19,33 +21,29 @@ const ApprovedEvents=()=>{
                 })
                 setEvents(events);
                 console.log(events);
+                for(var i=0;i<events.length;i++){
+                    if(events[i].eventPublished){
+                        // console.log(events[i].eventType);
+                        approvedEvent.push(events[i]);
+                    }
+                }
+                setApprovedEvents(approvedEvent);
             }
         })
     },[])
     return (
         <View>
-            {/* {events.map((event)=>{
-                return(
-                    <div>
-                        <Text>hi</Text>
-                    </div>
-                )
-            })} */}
-            {events.map((event)=>{
+            {approvedEvents.map((event)=>{
                     return(
                         <EventCard 
                     startDate={event.eventDate}
                     endDate={event.eventTime}
                     title={event.eventName}
+                    id={event.id}
                     ></EventCard>
                     )
             })}
-            <EventCard 
-            startDate="23"
-            endDate="25"
-            title="carpentering basics"
-            ></EventCard>
-            {/* <EventCard></EventCard> */}
+            
         </View>
     )
 }

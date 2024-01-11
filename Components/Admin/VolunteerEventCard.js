@@ -1,18 +1,11 @@
-import { deleteDoc,doc, getDoc } from 'firebase/firestore';
 import {TouchableOpacity, StyleSheet, Text, TextInput, View } from 'react-native';
-import { FIRESTORE_DB } from '../../FirebaseConfig';
 
 
 const Divider = () => {
     return <View style={styles.divider} />;
   };
 
-export const EventCard=(props)=>{
-  const eventId=props.id;
-   const ref =doc(FIRESTORE_DB, 'Event',eventId)
-    const deleteItem=async()=>{
-      deleteDoc(ref);
-    }
+export const VolunteerEventCard=(props)=>{
     return(
         
         <View style={styles.container}>
@@ -31,13 +24,16 @@ export const EventCard=(props)=>{
                 style={styles.button}
                 >View Details</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={deleteItem}>
+            <TouchableOpacity>
                 <Text
                 style={styles.button}
-
                 >Remove Event</Text>
             </TouchableOpacity>
-            
+            <TouchableOpacity>
+                <Text
+                style={styles.button}
+                >Approve Event</Text>
+            </TouchableOpacity>
             </View>
         </View>
     )

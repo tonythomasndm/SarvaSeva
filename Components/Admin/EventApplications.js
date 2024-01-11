@@ -24,13 +24,6 @@ export const PendingEvents=()=>{
     },[])
     return (
         <View>
-            {/* {events.map((event)=>{
-                return(
-                    <div>
-                        <Text>hi</Text>
-                    </div>
-                )
-            })} */}
             {events.map((event)=>{
                     return(
                         <EventCard 
@@ -45,7 +38,6 @@ export const PendingEvents=()=>{
             endDate="25"
             title="carpentering basics"
             ></EventCard>
-            {/* <EventCard></EventCard> */}
         </View>
     )
 }
