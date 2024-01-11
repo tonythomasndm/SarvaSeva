@@ -7,7 +7,9 @@ import { EventCreation } from './Components/Admin/CreateEvent';
 import ApprovedEvents from './Components/Admin/ApprovedEvents';
 import PendingEvents from './Components/Admin/EventApplications';
 import { HelperEventCreation } from './Components/Helper/CreateEventHelper';
-
+import { DefineSkill } from './Components/Admin/DefineSkill';
+import { HelperPage } from './Components/Helper/HelperPage';
+import { HelperSignup } from './Components/Helper/HelperSignup';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -20,6 +22,9 @@ export default function App() {
             <Stack.Screen name="ApprovedEvents" component={ApprovedEvents} options={{title:"Approved Events"}} />
             <Stack.Screen name="PendingEvents" component={PendingEvents} options={{title:"Pending Events"}} />
             <Stack.Screen name="HelperEventCreation" component={HelperEventCreation} options={{title:"Welcome Helper"}} />
+            <Stack.Screen name="DefineSkill" component={DefineSkill} options={{title:"Add skill"}} />
+            <Stack.Screen name="HelperPage" component={HelperPage} options={{title:"Welcome Helper"}} />
+            <Stack.Screen name="HelperSignup" component={HelperSignup} options={{title:"Helper Signup"}} />
 
             {/* <Stack.Screen name="Welcome" component={WelcomeScreen} options={{title:"Welcome"}} /> */}
             {/* <Stack.Screen name="VolunteerApplication" component={VolunteerApplication} options={{title:"Volunteer"}} /> */}
@@ -34,7 +39,7 @@ const HomeScreen=(props)=>{
       <TouchableOpacity onPress={() => props.navigation.navigate('AdminPage')} style={styles.button}>
       <Text style={styles.buttons}>Admin</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('HelperEventCreation')} style={styles.button}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('HelperSignup')} style={styles.button}>
       <Text style={styles.buttons}>Helper</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')} style={styles.button}>
