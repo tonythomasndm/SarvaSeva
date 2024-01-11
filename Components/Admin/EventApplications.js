@@ -3,8 +3,11 @@ import {TouchableOpacity, StyleSheet, Text, TextInput, View } from 'react-native
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { FIRESTORE_DB } from "../../FirebaseConfig";
+import { VolunteerEventCard } from "./VolunteerEventCard";
 export const PendingEvents=()=>{
     const [events,setEvents]=useState([]);
+    const [pendingEvents,setPendingEvents]=useState([]);
+    var pendingEvent=[];
     useEffect(()=>{
         const eventRef=collection(FIRESTORE_DB,'Event');
 
@@ -17,27 +20,35 @@ export const PendingEvents=()=>{
                         ...doc.data()
                     })
                 })
+                
                 setEvents(events);
-                console.log(events);
+                for(var i=0;i<events.length;i++){
+                    if(events[i].eventPublished==false){
+                        console.log('hi');
+                        pendingEvent.push(events[i]);
+                    }
+                }
+                console.log('printing sub')
+                console.log(pendingEvent)
+                setPendingEvents(pendingEvent);
+                console.log('printing pending')
+                console.log(pendingEvents);
             }
         })
     },[])
     return (
         <View>
-            {events.map((event)=>{
+            {pendingEvents.map((event)=>{
                     return(
-                        <EventCard 
+                        <VolunteerEventCard 
                     startDate={event.eventDate}
                     endDate={event.eventTime}
                     title={event.eventName}
-                    ></EventCard>
+                    id={event.id}
+                    ></VolunteerEventCard>
                     )
             })}
-            <EventCard 
-            startDate="23"
-            endDate="25"
-            title="carpentering basics"
-            ></EventCard>
+            
         </View>
     )
 }

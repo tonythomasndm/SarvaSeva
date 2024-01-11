@@ -6,7 +6,7 @@ import { AdminPage } from './Components/Admin/AdminPage';
 import { EventCreation } from './Components/Admin/CreateEvent';
 import ApprovedEvents from './Components/Admin/ApprovedEvents';
 import PendingEvents from './Components/Admin/EventApplications';
-
+import { HelperEventCreation } from './Components/Helper/CreateEventHelper';
 
 const Stack = createStackNavigator();
 
@@ -16,9 +16,11 @@ export default function App() {
         <Stack.Navigator initialRouteName='Home'>
             <Stack.Screen name="Home" component={HomeScreen} options={{title:"Welcome"}} />
             <Stack.Screen name="AdminPage" component={AdminPage} options={{title:"Welcome Admin"}} />
-            <Stack.Screen name="CreateEvent" component={EventCreation} options={{title:"Welcome Admin"}} />
-            <Stack.Screen name="ApprovedEvents" component={ApprovedEvents} options={{title:"Welcome Admin"}} />
-            <Stack.Screen name="PendingEvents" component={PendingEvents} options={{title:"Welcome Admin"}} />
+            <Stack.Screen name="CreateEvent" component={EventCreation} options={{title:"Admin Create Event"}} />
+            <Stack.Screen name="ApprovedEvents" component={ApprovedEvents} options={{title:"Approved Events"}} />
+            <Stack.Screen name="PendingEvents" component={PendingEvents} options={{title:"Pending Events"}} />
+            <Stack.Screen name="HelperEventCreation" component={HelperEventCreation} options={{title:"Welcome Helper"}} />
+
             {/* <Stack.Screen name="Welcome" component={WelcomeScreen} options={{title:"Welcome"}} /> */}
             {/* <Stack.Screen name="VolunteerApplication" component={VolunteerApplication} options={{title:"Volunteer"}} /> */}
             
@@ -32,10 +34,10 @@ const HomeScreen=(props)=>{
       <TouchableOpacity onPress={() => props.navigation.navigate('AdminPage')} style={styles.button}>
       <Text style={styles.buttons}>Admin</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.button}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('HelperEventCreation')} style={styles.button}>
       <Text style={styles.buttons}>Helper</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.button}>
+      {/* <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')} style={styles.button}>
       <Text style={styles.buttons}>Seeker</Text>
       </TouchableOpacity> */}
     </View>

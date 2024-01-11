@@ -20,7 +20,7 @@ const ApprovedEvents=()=>{
                     })
                 })
                 setEvents(events);
-                console.log(events);
+                // console.log(events);
                 for(var i=0;i<events.length;i++){
                     if(events[i].eventPublished){
                         // console.log(events[i].eventType);
