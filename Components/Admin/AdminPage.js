@@ -11,7 +11,7 @@ export const AdminPage=(props)=>{
   return(
     <View style={styles.container}>
         <TouchableOpacity onPress={() => props.navigation.navigate('CreateEvent')} style={styles.button}>
-      <Text style={styles.buttons}>Creat Events</Text>
+      <Text style={styles.buttons}>Create Events</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => props.navigation.navigate('ApprovedEvents')} style={styles.button}>
       <Text style={styles.buttons}>Approved Events</Text>
