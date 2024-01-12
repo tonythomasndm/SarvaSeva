@@ -40,7 +40,7 @@ const HomeScreen=(props)=>{
   return(
     <View style={styles.container}>
       <TouchableOpacity onPress={() => props.navigation.navigate('AdminPage')} style={styles.button}>
-      <Text style={styles.buttons}>Admin</Text>
+      <Text style={styles.buttons}>Administrator</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => props.navigation.navigate('HelperSignup')} style={styles.button}>
       <Text style={styles.buttons}>Helper</Text>
