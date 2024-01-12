@@ -7,6 +7,7 @@ import { EventCreation } from './Components/Admin/CreateEvent';
 import ApprovedEvents from './Components/Admin/ApprovedEvents';
 import PendingEvents from './Components/Admin/EventApplications';
 import { HelperEventCreation } from './Components/Helper/CreateEventHelper';
+import { VolunteerApplication } from './Components/Admin/VolunteerApplications';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
             <Stack.Screen name="CreateEvent" component={EventCreation} options={{title:"Admin Create Event"}} />
             <Stack.Screen name="ApprovedEvents" component={ApprovedEvents} options={{title:"Approved Events"}} />
             <Stack.Screen name="PendingEvents" component={PendingEvents} options={{title:"Pending Events"}} />
+            <Stack.Screen name="VolunteerApplications" component={VolunteerApplication} options={{title:"Volunteer Applications"}} />
             <Stack.Screen name="HelperEventCreation" component={HelperEventCreation} options={{title:"Welcome Helper"}} />
 
             {/* <Stack.Screen name="Welcome" component={WelcomeScreen} options={{title:"Welcome"}} /> */}
