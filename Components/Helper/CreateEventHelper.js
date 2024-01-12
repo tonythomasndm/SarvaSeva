@@ -1,60 +1,100 @@
-import { useState } from 'react';
-import {View, Text, TextInput, ActivityIndicator, Button, KeyboardAvoidingView,StyleSheet} from 'react-native';
-import { addDoc, collection } from 'firebase/firestore';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 import { FIRESTORE_DB } from '../../FirebaseConfig';
-export const HelperEventCreation=()=>{
-    
-    const [eventName,setEventName]=useState('');
-    const [eventTime,setEventTime]=useState('');
-    const [eventEndTime,setEventEndTime]=useState('');
-    const [eventDate,setEventDate]=useState('');
-    const [eventType,setEventType]=useState('');
-    const [eventVenue,setEventVenue]=useState('');
-    
-    const addEvent=async()=>{
-        try{
-            const docRef=await addDoc(collection(FIRESTORE_DB,'Event'),{
-                eventName:eventName,
-                eventTime:eventTime,
-                eventEndTime:eventEndTime,
-                eventDate:eventDate,
-                eventType:eventType,
-                eventVenue:eventVenue,
-                eventPublished:false,
-            });
-            console.log('event added with id: ',docRef.id);
-        }
-        catch(e){
-            console.log('error adding event: ',e);
-        }
-    };
-    
-    return (
-        <View style={styles.container}>
-            <TextInput value={eventName} style={styles.input} placeholder="Event Name" autoCapitalize="none" onChangeText={(text)=>setEventName(text)}></TextInput>
-            <TextInput value={eventDate} style={styles.input} placeholder="Event date" autoCapitalize="none" onChangeText={(text)=>setEventDate(text)}></TextInput>
-            <TextInput value={eventTime} style={styles.input} placeholder="Event start time" autoCapitalize="none" onChangeText={(text)=>setEventTime(text)}></TextInput>
-            <TextInput value={eventEndTime} style={styles.input} placeholder="Event end time" autoCapitalize="none" onChangeText={(text)=>setEventEndTime(text)}></TextInput>
-            <TextInput value={eventType} style={styles.input} placeholder="Event type" autoCapitalize="none" onChangeText={(text)=>setEventType(text)}></TextInput>
-            <TextInput value={eventVenue} style={styles.input} placeholder="Event Venue" autoCapitalize="none" onChangeText={(text)=>setEventVenue(text)}></TextInput>
 
-            <Button title="Add event" onPress={addEvent}/>
-        </View>
-    )
+
+
+const createTimeStamp = (date,startTime,endTime) => {
+  const [day, month, year] = date.split('-').map(Number);
+  const [shr, smin] = startTime.split('-').map(Number);
+  const [ehr, emin] = endTime.split('-').map(Number);
+  
+  const startDate = new Date(year, month-1, day, shr, smin);
+  const endDate = new Date(year, month-1, day, ehr, emin);
+
+  startTimeStamp = fromDate(startDate);
+  endTimeStamp = fromDate(endDate);
+  addEvent();
 }
 
+const addEvent = async () => {
+  try {
+    const docRef = await addDoc(collection(FIRESTORE_DB, 'Events'), {
+      eventName : name,
+      eventStart : startTimeStamp,
+      eventEnd : endTimeStamp,
+      adminApproved : false,
+      suggestedBy : 'dummy',
+    });
+  console.log('Document written with ID: ', docRef.id);
+  }
+  catch (e) {
+		console.error('Error adding document: ', e);
+	}
+}
+
+export const HelperCreateEventPage = () => {
+const [name, setName] = useState('');
+const [date, setDate] = useState('');
+const [startTime, setStartTime] = useState('');
+const [endTime, setEndTime] = useState('');
+let startTimeStamp;
+let endTimeStamp;
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        onChangeText={setName}
+        placeholder="Enter event name"
+        value={name}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={setDate}
+        placeholder="Enter date using '-'"
+        value={date}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={setStartTime}
+        placeholder="Enter start time using ':'"
+        value={startTime}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={setEndTime}
+        placeholder="Enter end time using ':'"
+        value={endTime}
+      />
+      <TouchableOpacity style={styles.button} onPress={()=>createTimeStamp(date,startTime,endTime)}>
+        <Text>Submit</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+export default HelperCreateEventPage;
+
 const styles = StyleSheet.create({
-    container:{
-        marginHorizontal: 20,
-        flex:1,
-        justifyContent:'center'
-    },
-    input:{
-        marginVertical:4,
-        height:50,
-        borderWidth:1,
-        borderRadius:4,
-        padding:10,
-        backgroundColor:"#fff"
-    }
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  input: {
+    height: 40,
+    width: 300,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  button:{
+    marginTop:20,
+    paddingTop:10,
+    paddingBottom:10,
+    paddingLeft:30,
+    paddingRight:30,
+    backgroundColor:'lightblue',
+  },
 });

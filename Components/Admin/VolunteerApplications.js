@@ -1,37 +1,55 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { EventCard } from "./eventCard";
+import {TouchableOpacity, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useEffect, useState } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { FIRESTORE_DB } from "../../FirebaseConfig";
+import { VolunteerEventCard } from "./VolunteerEventCard";
+export const VolunteerApplications=()=>{
+    const [events,setEvents]=useState([]);
+    const [pendingEvents,setPendingEvents]=useState([]);
+    var pendingEvent=[];
+    useEffect(()=>{
+        const eventRef=collection(FIRESTORE_DB,'Event');
 
-
-export const VolunteerApplication=(props)=>{
-  return(
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => props.navigation.navigate('AdminPage')} style={styles.button}>
-      <Text style={styles.buttons}>Admin</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('HelperEventCreation')} style={styles.button}>
-      <Text style={styles.buttons}>Helper</Text>
-      </TouchableOpacity>
-     
-    </View>
-  )
+        const subscriber=onSnapshot(eventRef,{
+            next:(snapshot)=>{
+                const events=[];
+                snapshot.docs.forEach((doc)=>{
+                    events.push({
+                        id:doc.id,
+                        ...doc.data()
+                    })
+                })
+                
+                setEvents(events);
+                for(var i=0;i<events.length;i++){
+                    if(events[i].eventPublished==false){
+                        console.log('hi');
+                        pendingEvent.push(events[i]);
+                    }
+                }
+                console.log('printing sub')
+                console.log(pendingEvent)
+                setPendingEvents(pendingEvent);
+                console.log('printing pending')
+                console.log(pendingEvents);
+            }
+        })
+    },[])
+    return (
+        <View>
+            {pendingEvents.map((event,key)=>{
+                    return(
+                        <VolunteerEventCard 
+                    startDate={event.eventDate}
+                    endDate={event.eventTime}
+                    title={event.eventName}
+                    id={event.id}
+                    ></VolunteerEventCard>
+                    )
+            })}
+            
+        </View>
+    )
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttons:{
-    fontSize:20,
-    color:'white',
-    backgroundColor:'#1245ff',
-    paddingTop:10,
-    paddingBottom:10,
-    paddingLeft:40,
-    paddingRight:40,
-    borderRadius:20,
-    margin:20,
-  
-  }
-});
+export default VolunteerApplications;
