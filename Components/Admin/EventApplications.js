@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { FIRESTORE_DB } from "../../FirebaseConfig";
 import { VolunteerEventCard } from "./VolunteerEventCard";
-export const PendingEvents=()=>{
+export const PendingEvents=(props)=>{
     const [events,setEvents]=useState([]);
     const [pendingEvents,setPendingEvents]=useState([]);
     var pendingEvent=[];
@@ -45,6 +45,8 @@ export const PendingEvents=()=>{
                     endDate={event.eventTime}
                     title={event.eventName}
                     id={event.id}
+                    navigation={props.navigation}
+                    volunteerId={event.volunteerId}
                     ></VolunteerEventCard>
                     )
             })}

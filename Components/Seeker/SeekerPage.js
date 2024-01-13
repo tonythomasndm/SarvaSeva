@@ -7,16 +7,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 
-export const HelperPage=(props)=>{
-    const id=props.route.params;
-    console.log('helper page id',id)
+export const SeekerPage=(props)=>{
   return(
     <View style={styles.container}>
-        <TouchableOpacity onPress={() => props.navigation.navigate('HelperEventCreation',{id:id})} style={styles.button}>
-      <Text style={styles.buttons}>Create Event</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('HelperEventCreation')} style={styles.button}>
-      <Text style={styles.buttons}>Apply in events</Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate('ApprovedEventsSeeker')} style={styles.button}>
+      <Text style={styles.buttons}>View Events</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity onPress={() => props.navigation.navigate('ApprovedEvents')} style={styles.button}>
       <Text style={styles.buttons}>Signup</Text>

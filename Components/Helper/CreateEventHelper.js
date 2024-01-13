@@ -2,8 +2,9 @@ import { useState } from 'react';
 import {View, Text, TextInput, ActivityIndicator, Button, KeyboardAvoidingView,StyleSheet} from 'react-native';
 import { addDoc, collection } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../FirebaseConfig';
-export const HelperEventCreation=()=>{
-    
+export const HelperEventCreation=(props)=>{
+    const id=props.route.params.id.id;
+    console.log(id);
     const [eventName,setEventName]=useState('');
     const [eventTime,setEventTime]=useState('');
     const [eventEndTime,setEventEndTime]=useState('');
@@ -21,8 +22,10 @@ export const HelperEventCreation=()=>{
                 eventType:eventType,
                 eventVenue:eventVenue,
                 eventPublished:false,
+                volunteerId:id
             });
             console.log('event added with id: ',docRef.id);
+            console.log('event added by volunteer id: ',id);
         }
         catch(e){
             console.log('error adding event: ',e);

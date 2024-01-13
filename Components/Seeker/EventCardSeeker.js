@@ -7,7 +7,7 @@ const Divider = () => {
     return <View style={styles.divider} />;
   };
 
-export const EventCard=(props)=>{
+export const EventCardSeeker=(props)=>{
   const eventId=props.id;
    const ref =doc(FIRESTORE_DB, 'Event',eventId)
     const deleteItem=async()=>{
@@ -26,19 +26,17 @@ export const EventCard=(props)=>{
             </View>
             <View>
                 <Text> {props.title}</Text>
-                <TouchableOpacity onPress={()=>{
-                  props.navigation.navigate('ViewDetails',{date:props.startDate,time:props.startTime,endTime:props.endTime,venue:props.venue,type:props.type})
-                }}>
+                <TouchableOpacity>
                 <Text
                 style={styles.button}
                 >View Details</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={deleteItem}>
+            {/* <TouchableOpacity onPress={deleteItem}>
                 <Text
                 style={styles.button}
 
                 >Remove Event</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             
             </View>
         </View>

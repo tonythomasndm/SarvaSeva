@@ -10,6 +10,11 @@ import { HelperEventCreation } from './Components/Helper/CreateEventHelper';
 import { DefineSkill } from './Components/Admin/DefineSkill';
 import { HelperPage } from './Components/Helper/HelperPage';
 import { HelperSignup } from './Components/Helper/HelperSignup';
+import ApprovedEventsSeeker from './Components/Seeker/ApprovedEventsSeeker';
+import { SeekerSignup } from './Components/Seeker/SeekerSignup';
+import { SeekerPage } from './Components/Seeker/SeekerPage';
+import { ViewDetails } from './Components/Admin/ViewDetails';
+import { ViewDetailsVolunteer } from './Components/Admin/ViewDetailsVolunteer';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -25,6 +30,12 @@ export default function App() {
             <Stack.Screen name="DefineSkill" component={DefineSkill} options={{title:"Add skill"}} />
             <Stack.Screen name="HelperPage" component={HelperPage} options={{title:"Welcome Helper"}} />
             <Stack.Screen name="HelperSignup" component={HelperSignup} options={{title:"Helper Signup"}} />
+            <Stack.Screen name="ApprovedEventsSeeker" component={ApprovedEventsSeeker} options={{title:"Welcome Seeker"}} />
+            <Stack.Screen name="SeekerSignup" component={SeekerSignup} options={{title:"Seeker Signup"}} />
+            {/* <Stack.Screen name="SeekerSignup" component={SeekerSignup} options={{title:"Seeker Signup"}} /> */}
+            <Stack.Screen name="SeekerPage" component={SeekerPage} options={{title:"Welcome Seeker"}} />
+            <Stack.Screen name="ViewDetails" component={ViewDetails} options={{title:"Event Details"}} />
+            <Stack.Screen name="ViewDetailsVolunteer" component={ViewDetailsVolunteer} options={{title:"Event Details"}} />
 
             {/* <Stack.Screen name="Welcome" component={WelcomeScreen} options={{title:"Welcome"}} /> */}
             {/* <Stack.Screen name="VolunteerApplication" component={VolunteerApplication} options={{title:"Volunteer"}} /> */}
@@ -42,9 +53,9 @@ const HomeScreen=(props)=>{
       <TouchableOpacity onPress={() => props.navigation.navigate('HelperSignup')} style={styles.button}>
       <Text style={styles.buttons}>Helper</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')} style={styles.button}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('SeekerSignup')} style={styles.button}>
       <Text style={styles.buttons}>Seeker</Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   )
 }

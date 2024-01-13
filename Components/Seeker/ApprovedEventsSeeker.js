@@ -1,9 +1,9 @@
-import { EventCard } from "./eventCard";
 import {TouchableOpacity, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { FIRESTORE_DB } from "../../FirebaseConfig";
-const ApprovedEvents=(props)=>{
+import { EventCardSeeker } from './EventCardSeeker';
+const ApprovedEventsSeeker=()=>{
     const [events,setEvents]=useState([]);
     const [approvedEvents,setApprovedEvents]=useState([]);
     var approvedEvent=[];
@@ -33,20 +33,16 @@ const ApprovedEvents=(props)=>{
         <View>
             {approvedEvents.map((event)=>{
                     return(
-                        <EventCard 
+                        <EventCardSeeker
                     startDate={event.eventDate}
-                    startTime={event.eventTime}
-                    endTime={event.eventEndTime}
+                    endDate={event.eventTime}
                     title={event.eventName}
-                    venue={event.eventVenue}
                     id={event.id}
-                    type={event.eventType}
-                    navigation={props.navigation}
-                    ></EventCard>
+                    ></EventCardSeeker>
                     )
             })}
             
         </View>
     )
 }
-export default ApprovedEvents;
+export default ApprovedEventsSeeker;

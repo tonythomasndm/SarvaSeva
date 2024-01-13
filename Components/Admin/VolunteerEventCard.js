@@ -7,6 +7,7 @@ const Divider = () => {
   };
 
 export const VolunteerEventCard=(props)=>{
+    console.log('hi from volunteerevent card',props.volunteerId);
     const eventId=props.id;
    const ref =doc(FIRESTORE_DB, 'Event',eventId)
     const deleteItem=async()=>{
@@ -30,7 +31,9 @@ export const VolunteerEventCard=(props)=>{
             </View>
             <View>
                 <Text> {props.title}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    props.navigation.navigate('ViewDetailsVolunteer',{date:props.startDate,time:props.startTime,endTime:props.endTime,venue:props.venue,type:props.type,volunteerId:props.volunteerId})
+                }}>
                 <Text
                 style={styles.button}
                 >View Details</Text>
@@ -52,7 +55,6 @@ export const VolunteerEventCard=(props)=>{
 
 const styles=StyleSheet.create({
     container:{
-        // flex:1,
         display:'flex',
         flexDirection:'row',
         backgroundColor:'#fff',
@@ -65,8 +67,6 @@ const styles=StyleSheet.create({
         margin: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        // paddingLeft: 30,
-        // paddingRight: 15,
         ...Platform.select({
             ios: {
               shadowColor: 'black',
@@ -83,7 +83,6 @@ const styles=StyleSheet.create({
     leftside:{
         display:'flex',
         flexDirection:'column',
-        // alignItems:'center',
         justifyContent:'space-evenly',
         backgroundColor:'#F4F4F4',
         borderRadius:10,
@@ -99,7 +98,6 @@ const styles=StyleSheet.create({
         marginVertical: 10,
       },
       button:{
-        // flex:1,
         textAlign:'center',
         display:'flex',
         backgroundColor:'#EC780D',

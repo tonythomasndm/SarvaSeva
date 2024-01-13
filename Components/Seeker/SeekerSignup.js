@@ -1,49 +1,28 @@
 import {View, Text, TextInput, ActivityIndicator, Button, KeyboardAvoidingView,StyleSheet,TouchableOpacity} from 'react-native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { NavigationProp } from '@react-navigation/native';
 import { FIRESTORE_DB } from '../../FirebaseConfig';
-import DropdownComponent from '../Dropdown';
-
-
-const data = [
-    { label: 'Item 600', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
-  ];
-
-export const HelperSignup=(props)=>{
+export const SeekerSignup=(props)=>{
     const [name,setName]=useState('');
     const [phone,setPhone]=useState('');
     const [address,setAddress]=useState('');
     const [aadharno,setAadharno]=useState('');
-    const [skills,setSkills]=useState('');
-    const [id,setId]=useState('');
-    const addHelper=async()=>{
+    const addSeeker=async()=>{
         try{
-            const docRef= await addDoc(collection(FIRESTORE_DB,'Volunteer'),{
+            const docRef= await addDoc(collection(FIRESTORE_DB,'Seeker'),{
                 name:name,
                 phone:phone,
                 address:address,
-                aadharno:aadharno,
-                skills:skills
+                aadharno:aadharno
             });
-            console.log("person added with document id : ", docRef.id);
-            var i=docRef.id
-            setId(i);
-            console.log("this is fron helpersignuppage",i);
-            props.navigation.navigate("HelperPage",{id:i});
+            console.log("seeker added with document id : ", docRef.id);
+            props.navigation.navigate("ApprovedEventsSeeker")
         }
         catch(e){
             console.error('error adding document: '+e);
         }
     }
-    
     
     return (
         <View style={styles.container}>
@@ -51,10 +30,8 @@ export const HelperSignup=(props)=>{
             <TextInput value={phone} style={styles.input} placeholder="Phone" autoCapitalize="none" onChangeText={(text)=>setPhone(text)}></TextInput>
             <TextInput value={address} style={styles.input} placeholder="Address" autoCapitalize="none" onChangeText={(text)=>setAddress(text)}></TextInput>
             <TextInput value={aadharno} style={styles.input} placeholder="Aadhar number" autoCapitalize="none" onChangeText={(text)=>setAadharno(text)}></TextInput>
-            <TextInput value={skills} style={styles.input} placeholder="Skills" autoCapitalize="none" onChangeText={(text)=>setSkills(text)}></TextInput>
-            <DropdownComponent data={data}/>
             <TouchableOpacity
-      onPress={()=>addHelper()}
+      onPress={()=>addSeeker()}
       >
         <Text
         style={styles.button_save}
@@ -63,7 +40,6 @@ export const HelperSignup=(props)=>{
     </View>
     )
 }
-// export default Page1;
 const styles = StyleSheet.create({
     container:{
         marginHorizontal: 20,
