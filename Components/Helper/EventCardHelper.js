@@ -1,4 +1,4 @@
-import { deleteDoc,doc, getDoc } from 'firebase/firestore';
+import { deleteDoc,doc, getDoc, updateDoc } from 'firebase/firestore';
 import {TouchableOpacity, StyleSheet, Text, TextInput, View } from 'react-native';
 import { FIRESTORE_DB } from '../../FirebaseConfig';
 
@@ -8,19 +8,17 @@ const Divider = () => {
   };
 
 export const EventCardHelper=(props)=>{
-  const eventId=props.id;
-  
+   const eventId=props.id;
 
-//   const volunteersWhoApplied=event
    const ref =doc(FIRESTORE_DB, 'Event',eventId)
-   const updateItem=async()=>{
-    console.log('updating')
-    updateDoc(ref,{eventPublished:true});
-}
     const apply=async()=>{
-        props.eventVolunteers.push(props.volunteerId);
-        const ids=props.eventVolunteers;
-        console.log('id of volunteer is :', ids);
+        if(props.eventVolunteers.indexOf(props.volunteerId)==-1){
+            props.eventVolunteers.push(props.volunteerId);
+            const ids=props.eventVolunteers;
+            console.log('id of volunteer is :', ids);
+            updateDoc(ref,{eventVolunteers:ids});
+        }
+        
 
     }
     return(
@@ -48,8 +46,6 @@ export const EventCardHelper=(props)=>{
                 style={styles.button}
                 >Apply in the event</Text>
             </TouchableOpacity>
-           
-            
             </View>
         </View>
     )
@@ -70,8 +66,6 @@ const styles=StyleSheet.create({
         margin: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        // paddingLeft: 30,
-        // paddingRight: 15,
         ...Platform.select({
             ios: {
               shadowColor: 'black',
