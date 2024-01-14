@@ -21,6 +21,7 @@ export const EventCreation=()=>{
                 eventType:eventType,
                 eventVenue:eventVenue,
                 eventPublished:true,
+                eventVolunteers:[]
             });
             console.log('event added with id: ',docRef.id);
         }

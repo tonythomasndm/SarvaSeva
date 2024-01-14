@@ -19,9 +19,9 @@ export const AdminPage=(props)=>{
       <TouchableOpacity onPress={() => props.navigation.navigate('PendingEvents')} style={styles.button}>
       <Text style={styles.buttons}>Event Applications</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => props.navigation.navigate('SignIn')} style={styles.button}>
-      <Text style={styles.buttons}>Volunteer Applications</Text>
-      </TouchableOpacity> */}
+      <TouchableOpacity onPress={() => props.navigation.navigate('PendingEvents')} style={styles.button}>
+      <Text style={styles.buttons}>Volunteering Applications</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => props.navigation.navigate('DefineSkill')} style={styles.button}>
       <Text style={styles.buttons}>Add Skill</Text>
       </TouchableOpacity>
@@ -47,8 +47,6 @@ const styles = StyleSheet.create({
     borderRadius:20,
     margin:20,
     width:300,
-    textAlign:'center'
-
-  
+    textAlign:'center'  
   }
 });

@@ -22,7 +22,7 @@ export const HelperEventCreation=(props)=>{
                 eventType:eventType,
                 eventVenue:eventVenue,
                 eventPublished:false,
-                volunteerId:id
+                eventVolunteers:[id]
             });
             console.log('event added with id: ',docRef.id);
             console.log('event added by volunteer id: ',id);

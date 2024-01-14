@@ -1,16 +1,16 @@
-import { EventCard } from "./eventCard";
+import { EventCard } from '../Admin/eventCard';
 import {TouchableOpacity, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { FIRESTORE_DB } from "../../FirebaseConfig";
-import { VolunteerEventCard } from "./VolunteerEventCard";
-export const PendingEvents=(props)=>{
+import { EventCardHelper } from './EventCardHelper';
+const ApprovedEventsHelper=(props)=>{
     const [events,setEvents]=useState([]);
-    const [pendingEvents,setPendingEvents]=useState([]);
-    var pendingEvent=[];
+    const id=props.route.params.id;
+    const [approvedEvents,setApprovedEvents]=useState([]);
+    var approvedEvent=[];
     useEffect(()=>{
         const eventRef=collection(FIRESTORE_DB,'Event');
-
         const subscriber=onSnapshot(eventRef,{
             next:(snapshot)=>{
                 const events=[];
@@ -20,38 +20,35 @@ export const PendingEvents=(props)=>{
                         ...doc.data()
                     })
                 })
-                
                 setEvents(events);
                 for(var i=0;i<events.length;i++){
-                    if(events[i].eventPublished==false){
-                        console.log('hi');
-                        pendingEvent.push(events[i]);
+                    if(events[i].eventPublished){
+                        approvedEvent.push(events[i]);
                     }
                 }
-                console.log('printing sub')
-                console.log(pendingEvent)
-                setPendingEvents(pendingEvent);
-                console.log('printing pending')
-                console.log(pendingEvents);
+                setApprovedEvents(approvedEvent);
             }
         })
     },[])
     return (
         <View>
-            {pendingEvents.map((event)=>{
+            {approvedEvents.map((event)=>{
                     return(
-                    <VolunteerEventCard 
+                        <EventCardHelper
                     startDate={event.eventDate}
-                    endDate={event.eventTime}
+                    startTime={event.eventTime}
+                    endTime={event.eventEndTime}
                     title={event.eventName}
+                    venue={event.eventVenue}
                     id={event.id}
+                    type={event.eventType}
                     navigation={props.navigation}
                     eventVolunteers={event.eventVolunteers}
-                    ></VolunteerEventCard>
+                    volunteerId={id.id}
+                    ></EventCardHelper>
                     )
             })}
-            
         </View>
     )
 }
-export default PendingEvents;
+export default ApprovedEventsHelper;

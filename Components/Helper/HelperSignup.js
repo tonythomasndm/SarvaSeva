@@ -23,7 +23,6 @@ export const HelperSignup=(props)=>{
     const [address,setAddress]=useState('');
     const [aadharno,setAadharno]=useState('');
     const [skills,setSkills]=useState('');
-    const [id,setId]=useState('');
     const addHelper=async()=>{
         try{
             const docRef= await addDoc(collection(FIRESTORE_DB,'Volunteer'),{
@@ -34,8 +33,7 @@ export const HelperSignup=(props)=>{
                 skills:skills
             });
             console.log("person added with document id : ", docRef.id);
-            var i=docRef.id
-            setId(i);
+            var i=docRef.id;
             console.log("this is fron helpersignuppage",i);
             props.navigation.navigate("HelperPage",{id:i});
         }

@@ -15,14 +15,12 @@ export const HelperPage=(props)=>{
         <TouchableOpacity onPress={() => props.navigation.navigate('HelperEventCreation',{id:id})} style={styles.button}>
       <Text style={styles.buttons}>Create Event</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('HelperEventCreation')} style={styles.button}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('ApprovedEventsHelper',{id:id})} style={styles.button}>
       <Text style={styles.buttons}>Apply in events</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => props.navigation.navigate('ApprovedEvents')} style={styles.button}>
-      <Text style={styles.buttons}>Signup</Text>
-      </TouchableOpacity> */}
      
-      
+     
+    
     </View>
   )
 }

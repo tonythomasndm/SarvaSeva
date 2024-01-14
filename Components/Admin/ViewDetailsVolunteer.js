@@ -6,10 +6,7 @@ import { FIRESTORE_DB } from "../../FirebaseConfig";
 const Divider = () => {
     return <View style={styles.divider} />;
   };
-
-
   const Table = (props) => {
-   
     return (
       <View style={styles.table}>
         
@@ -65,6 +62,7 @@ const Divider = () => {
   export const ViewDetailsVolunteer=(props)=>{
 
     const data=props.route.params;
+    console.log(data);
     const [volunteers,setVolunteers]=useState([]);
     const [volunteer,setVolunteer]=useState([]);
     var v=[];
@@ -81,11 +79,10 @@ const Divider = () => {
                 })
                 setVolunteers(events);
                 for(var i=0;i<events.length;i++){
-                    console.log(events[i].id, data.volunteerId);
-                    if(events[i].id==data.volunteerId){
+                    console.log(events[i].id, data.eventVolunteers[0]);
+                    if(events[i].id==data.eventVolunteers[0]){
                         v.push(events[i]);
                     }
-
                 }
                 setVolunteer(v)
             }
@@ -94,7 +91,7 @@ const Divider = () => {
     return(
         
         <View style={styles.container}>
-            <Text style={styles.title}>{data.volunteerId}</Text>
+            <Text style={styles.title}>{data.eventVolunteers[0]}</Text>
             
             {(volunteer.length>0)?<Text style={styles.title}>{volunteer[0].name}</Text>:<Text style={styles.title}></Text>}
             <Table 
