@@ -1,6 +1,6 @@
 import {View, Text, TextInput, ActivityIndicator, Button, KeyboardAvoidingView,StyleSheet,TouchableOpacity} from 'react-native';
 import { useEffect, useState } from 'react';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 import { NavigationProp } from '@react-navigation/native';
 import { FIRESTORE_DB } from '../../FirebaseConfig';
 import DropdownComponent from '../Dropdown';
@@ -23,7 +23,7 @@ export const HelperSignup=(props)=>{
     const [address,setAddress]=useState('');
     const [aadharno,setAadharno]=useState('');
     const [skills,setSkills]=useState('');
-    
+    const [skillsArray,setSkillsArray]=useState([]);
     const addHelper=async()=>{
         try{
             const docRef= await addDoc(collection(FIRESTORE_DB,'Volunteer'),{
@@ -43,7 +43,22 @@ export const HelperSignup=(props)=>{
         }
     }
     
-    
+    useEffect(()=>{
+        const skillRef=collection(FIRESTORE_DB,'Skill');
+        const subscriber=onSnapshot(skillRef,{
+            next:(snapshot)=>{
+                const skills=[];
+                snapshot.docs.forEach((doc)=>{
+                    skills.push({
+                        id:doc.id,
+                        ...doc.data()
+                    })
+                })
+            setSkillsArray(skills);
+            }
+        })
+    },[]);
+    console.log(skillsArray);
     return (
         <View style={styles.container}>
             <TextInput value={name} style={styles.input} placeholder="Name" autoCapitalize="none" onChangeText={(text)=>setName(text)}></TextInput>
